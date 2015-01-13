@@ -65,9 +65,10 @@ File root;
 File entry;
 int fileCount = 0; 
 String* filesArr = NULL;
+char str = NULL; 
 
-  char *names[5]={"sample 1", "sample 2", "sample 3", "16MB", "192kbps"}; //hard coded music files
-  char *files[5]={"sample1.mp3", "sample2.mp3", "sample3.mp3", "16MB.mp3", "192kbps.mp3"};
+// char *names[5]={"sample 1", "sample 2", "sample 3", "16MB", "192kbps"}; //hard coded music files
+// char *files[5]={"sample1.mp3", "sample2.mp3", "sample3.mp3", "16MB.mp3", "192kbps.mp3"};
   
   
 void setup() {
@@ -84,7 +85,34 @@ void setup() {
     }
     Serial.println(F("VS1053 found"));
 
-    SD.begin(CARDCS);    // initialise the SD card
+    // SD.begin(CARDCS);    // initialise the SD card REDUNDANDT?
+
+
+    Serial.print("Initializing SD card...");
+    // On the Ethernet Shield, CS is pin 4. It's set as an output by default.
+    // Note that even if it's not used as the CS pin, the hardware SS pin 
+    // (10 on most Arduino boards, 53 on the Mega) must be left as an output 
+    // or the SD library functions will not work. 
+    pinMode(4, OUTPUT);
+
+    if (!SD.begin(4)) {
+        Serial.println("SD initialization failed!");
+        return;
+    }
+    Serial.println("SD initialization done.");
+
+    //reopens the root file for each op to avoid a bug indicating there are no more files to read.
+    //http://stackoverflow.com/questions/16971084/how-to-recheck-file-in-arduino-sd-card
+    root = SD.open("/");
+
+    if(root) {
+        writeDirectory(root);        
+        root.close();
+    }
+    else {
+        Serial.println("Failed to open directory");
+    }
+
 
     // Set volume for left, right channels. lower numbers == louder volume!
     //musicPlayer.setVolume(5,5);
@@ -98,13 +126,23 @@ void setup() {
 
     int count = 0;
 
-    
-
-    while (count < 5){
+    while (count <= fileCount){
 
         Serial.print("Playing ");
-        Serial.println(names[count]);
-        musicPlayer.startPlayingFile(files[count]);
+        Serial.println(filesArr[count]);
+        
+        // Serial.print(filesArr[count].length());
+        // char str[filesArr[count].length()];
+        // filesArr[count].toCharArray(str,filesArr[count].length());
+        // mediaObject.playFunction(str);
+        
+
+
+        int len = filesArr[count].length();
+        char str[len]; //Might have to do this with dynamic memory allocation
+        filesArr[count].toCharArray(str,len);
+
+        musicPlayer.startPlayingFile(str);
         count ++ ;
         Serial.println(count);
 
@@ -169,3 +207,47 @@ void loop() {
     }
     delay(100);
 }
+
+int countFiles(File dir) {
+    Serial.println("Counting files...");
+    while(true) {
+     
+        entry =  dir.openNextFile();
+        if (!entry) {
+            // no more files
+            Serial.println(fileCount);
+            Serial.println("No more files to count.");
+            break;
+        }
+            if (entry.isDirectory()) {
+            //do nothing
+        } else if (entry.size() != 0){
+            fileCount++;
+        }
+    }
+}
+
+void writeDirectory(File dir) {
+    countFiles(root);
+    root.close();
+
+    root = SD.open("/");
+    
+    filesArr = new String[fileCount];
+
+    Serial.println("Writing files...");
+    for(int i = 0; i < fileCount; i++){
+        entry =  dir.openNextFile();
+        if (entry.isDirectory()) {
+            Serial.print("is a Dir");
+            //do nothing
+        } else if (entry.size() != 0){
+            // files have sizes - directories do not
+            Serial.print(entry.name());
+            filesArr[i] = entry.name();
+        } else{
+            Serial.print("ERROR!! ");
+        }
+    }
+    entry.close();
+} 

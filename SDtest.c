@@ -2,8 +2,9 @@
 
 File root;
 File entry;
-int count = 0;
+int fileCount = 0; 
 String* filesArr = NULL;
+char* fileList = NULL;
 
 
 void setup()
@@ -38,15 +39,13 @@ void setup()
     else {
         Serial.println("Failed to open directory");
     }
-    Serial.print("Final Files Array: \n");
-    for(int t = 0; t < count; t++){
+    Serial.print("EXTRA FINAL Files Array: \n");
+    for(int t = 0; t < fileCount; t++){
         Serial.print(t);
         Serial.print("\n");
-        Serial.print(filesArr[t]);
+        Serial.print(fileList[t]);
         Serial.print("\n");
     }
-
-
 }
 
 void loop()
@@ -61,17 +60,14 @@ int countFiles(File dir) {
         entry =  dir.openNextFile();
         if (!entry) {
             // no more files
-            Serial.println(count);
+            Serial.println(fileCount);
             Serial.println("No more files to count.");
             break;
         }
             if (entry.isDirectory()) {
             //do nothing
         } else if (entry.size() != 0){
-            // files have sizes, directories do not
-            count++;
-            // Serial.println(count);
-            // Serial.print("\n");
+            fileCount++;
         }
     }
 }
@@ -82,35 +78,33 @@ void writeDirectory(File dir) {
 
     root = SD.open("/");
     
-    filesArr = new String[count];
+    filesArr = new String[fileCount];
+    fileList = new char[fileCount];
 
     Serial.println("Writing files...");
-    for(int i = 0; i < count; i++){
+    for(int i = 0; i < fileCount; i++){
         entry =  dir.openNextFile();
         if (entry.isDirectory()) {
             Serial.print("is a Dir");
             //do nothing
         } else if (entry.size() != 0){
             // files have sizes - directories do not
-            // Serial.print("Entry: ");
             Serial.print(entry.name());
-            // Serial.print("\n");
-            // Serial.print("File Arr:  ");
             filesArr[i] = entry.name();
-            // Serial.print(filesArr[i]);
-            // Serial.print("\n");
         } else{
             Serial.print("ERROR!! ");
         }
     }
     entry.close();
-    // Serial.print("Final Files Array: \n");
-    // for(int t = 0; t < count; t++){
-    //     Serial.print(t);
-    //     Serial.print("\n");
-    //     Serial.print(filesArr[t]);
-    //     Serial.print("\n");
-    // }
-    // delete [] filesArr;
-    // filesArr = NULL;
-}
+
+
+
+
+    for(int j = 0; j < fileCount; j++){
+        String temp = NULL;
+        temp = filesArr[j];
+        char str[sizeof(temp)];
+        temp.toCharArray(str,sizeof(str));
+        fileList[j] = temp;
+    }
+} 
