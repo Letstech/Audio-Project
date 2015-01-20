@@ -54,22 +54,14 @@ int inputPin2 = 1;
 
 int potPin = 0;   // Analog pin assignment for Potentiometer Dial
 
-
-
 boolean buttonPressed1 = false;
 boolean buttonPressed2 = false;//boolean testing 
- 
-
 
 File root;
 File entry;
 int fileCount = 0; 
 String* filesArr = NULL;
 char str = NULL; 
-
-// char *names[5]={"sample 1", "sample 2", "sample 3", "16MB", "192kbps"}; //hard coded music files
-// char *files[5]={"sample1.mp3", "sample2.mp3", "sample3.mp3", "16MB.mp3", "192kbps.mp3"};
-  
   
 void setup() {
   
@@ -128,23 +120,21 @@ void setup() {
 
     while (count <= fileCount){
 
-        Serial.print("Playing ");
-        Serial.println(filesArr[count]);
-        
-        // Serial.print(filesArr[count].length());
-        // char str[filesArr[count].length()];
-        // filesArr[count].toCharArray(str,filesArr[count].length());
-        // mediaObject.playFunction(str);
-        
-
+        // Serial.print("Playing ");
+        // Serial.println(filesArr[count]);
 
         int len = filesArr[count].length();
-        char str[len]; //Might have to do this with dynamic memory allocation
+        str = new char[len]; 
         filesArr[count].toCharArray(str,len);
+
+        Serial.print("playing ");
+        Serial.print(str);
 
         musicPlayer.startPlayingFile(str);
         count ++ ;
         Serial.println(count);
+        delete [] str;
+        str = NULL;
 
         while (! musicPlayer.stopped() ){
             loop();
@@ -231,7 +221,7 @@ void writeDirectory(File dir) {
     countFiles(root);
     root.close();
 
-    root = SD.open("/");
+    // root = SD.open("/");
     
     filesArr = new String[fileCount];
 
@@ -247,7 +237,9 @@ void writeDirectory(File dir) {
             filesArr[i] = entry.name();
         } else{
             Serial.print("ERROR!! ");
+            Serial.print(entry.name());
         }
     }
     entry.close();
+    Serial.print("Done writing files");
 } 
