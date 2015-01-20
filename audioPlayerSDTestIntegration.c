@@ -61,7 +61,7 @@ File root;
 File entry;
 int fileCount = 0; 
 String* filesArr = NULL;
-char str = NULL; 
+char* str = NULL; 
   
 void setup() {
   
@@ -123,17 +123,17 @@ void setup() {
         // Serial.print("Playing ");
         // Serial.println(filesArr[count]);
 
-        int len = filesArr[count].length();
-        str = new char[len]; 
-        filesArr[count].toCharArray(str,len);
+        int len = filesArr[count].length() +1;
+        str = new char[len]; //error: invalid conversion from ‘char*’ to ‘char’ [-fpermissive]
+        filesArr[count].toCharArray(str,len); //error: invalid conversion from ‘char’ to ‘char*’ [-fpermissive]
 
         Serial.print("playing ");
-        Serial.print(str);
+        Serial.println(str);
 
         musicPlayer.startPlayingFile(str);
         count ++ ;
         Serial.println(count);
-        delete [] str;
+        delete [] str; //error: type ‘char’ argument given to ‘delete’, expected pointer
         str = NULL;
 
         while (! musicPlayer.stopped() ){
@@ -221,7 +221,7 @@ void writeDirectory(File dir) {
     countFiles(root);
     root.close();
 
-    // root = SD.open("/");
+    root = SD.open("/");
     
     filesArr = new String[fileCount];
 
@@ -233,13 +233,13 @@ void writeDirectory(File dir) {
             //do nothing
         } else if (entry.size() != 0){
             // files have sizes - directories do not
-            Serial.print(entry.name());
+            Serial.println(entry.name());
             filesArr[i] = entry.name();
         } else{
             Serial.print("ERROR!! ");
-            Serial.print(entry.name());
+            Serial.println(entry.name());
         }
     }
     entry.close();
-    Serial.print("Done writing files");
+    Serial.println("Done writing files");
 } 
