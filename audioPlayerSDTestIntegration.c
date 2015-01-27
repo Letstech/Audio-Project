@@ -61,6 +61,7 @@ File root;
 File entry;
 int fileCount = 0; 
 String* filesArr = NULL;
+unsigned long* sizes = NULL;
 char* str = NULL; 
   
 void setup() {
@@ -224,6 +225,7 @@ void writeDirectory(File dir) {
     root = SD.open("/");
     
     filesArr = new String[fileCount];
+    sizes = new unsigned long [fileCount];
 
     Serial.println("Writing files...");
     for(int i = 0; i < fileCount; i++){
@@ -235,6 +237,8 @@ void writeDirectory(File dir) {
             // files have sizes - directories do not
             Serial.println(entry.name());
             filesArr[i] = entry.name();
+            Serial.println(entry.size());
+            sizes[i] = entry.size();
         } else{
             Serial.print("ERROR!! ");
             Serial.println(entry.name());
@@ -242,4 +246,10 @@ void writeDirectory(File dir) {
     }
     entry.close();
     Serial.println("Done writing files");
+    for(int t = 0; t < fileCount; t++){
+            Serial.print(filesArr[t]);
+            Serial.print("\n");
+            Serial.println(sizes[t]);
+            Serial.print("\n");
+        }
 } 
