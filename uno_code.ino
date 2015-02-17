@@ -236,8 +236,8 @@ void loop() {
     isRecording = true;
     
     // Check if the file exists already
-    char filename[15];
-    strcpy(filename, "R00.OGG");
+    char filename[8];
+    strcpy(filename, "R00.OGG"); 
     for (uint8_t i = 0; i < 100; i++) {
       filename[1] = '0' + i/10;
       filename[2] = '0' + i%10;
