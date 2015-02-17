@@ -161,7 +161,7 @@ void loop() {
     {
        musicPlayer.stopPlaying();
        delay(300);
-       musicPlayer.sineTest(0x44, 500); 
+      
        if(musicPlayer.stopped() && !isRecording)
        {
          
@@ -280,6 +280,7 @@ void loop() {
   /******************** recording code **********************/
   if (!isRecording && !digitalRead(REC_BUTTON)) {
     Serial.println(F("Begin recording"));
+     musicPlayer.sineTest(0x44, 500); 
     isRecording = true;
     
     // Check if the file exists already
