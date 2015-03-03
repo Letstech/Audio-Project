@@ -1,0 +1,125 @@
+ChatterTale Prototype Manual Setup
+
+List of materials:
+Male- male dupont cables	Pack
+Male- female dupont cables	Pack
+Arduino uno or mega 	1
+Adafruit music maker	1
+Push buttons 	5
+250 ohms resistors	5
+Max 9841 microphone	1
+Headphone jack	1
+12 v battery	1
+10 k potentiometer	2
+Sd card	1
+Earphone jack	1
+Material for the amplifier:
+10 k potentiometer	1
+Lm386	6 in case you burn one or 2 or 3
+1.2k ½ watt 	1
+10 nano farad ceramic capacitor	1 this is for the bypass
+10 micro farad ceramic capacitor	1
+10 ohm ½ watt resistor	1
+≈ 0.05 micro farad ceramic capacitor	1
+250 micro farad electrolytic capacitor	1
+
+
+
+
+
+
+
+
+
+
+
+
+1.	You will need to take an Arduino Uno board and a Adafruit music maker MP3 shield and attach them together from the pins. Start by placing the MP3 shield on top of the arduino board.
+
+
+ 
+
+2.	Next you will need to apply your buttons to the two board together. Take a breadboard and 5 push buttons and 5 male to female wires. You will also need 5 250 ohm 0.25 W resistors. Follow the diagram below when assigning the wires and resistors on the breadboard. (Note the resistors in the diagram don’t match the resistors we need, diagram is for placement guidance.) The digital pins you are going to wire to the surface of the MP3 shield are 9,8,5 and 2. The last wire will be pinned to the RESET header on the shield. Pin 2 will be your Pause/Play. Pin 5 will be your fast forward/skip forward. Pin 8 will be your record. Pin 9 will be your rewind/skip backward. And finally the reset pin will restart the device.
+
+    
+
+3.	Next you will need to place a potentiometer on the same breadboard where you placed your buttons. The potentiometer is going to be your volume dial.  You should have 3 wires soldered to the potentiometer already.  With the dial facing towards you take the leftmost wire and pin it to the plus column in your breadboard. Then take your rightmost wire and pin it to the minus column on your breadboard. Now with the middle wire pin it directly to the breadboard and take a male to female wire and pin it to the breadboard next to the middle wire you pinned from the potentiometer and pin it to the MP3 shield on Analog 0 “A0”.
+
+  
+
+4.	You will need to input a LED light indicator onto the breadboard. Start with an LED light that will be placed onto the breadboard. Looking at the LED light look at the pin ends for your LED light. They should have a long end and a short end. Take the short end and place it into the minus column of your breadboard, then proceed to placing the long endpin of your LED light and place it on your breadboard.  Next you will need to grab a resistor as well as another male to female wire. Follow the diagram in placing the resistor and the wire so that they are aligned with the LED light placed on the breadboard. The other end of the wire should be pinned to Digital 10 on the surface of the MP3 shield.
+
+   
+
+5.	Next you will need the microphone component that will also be placed onto the breadboard. You will also need 1 additional male to female wire and 2 male to male wires. Follow the diagram the and look at the microphone. With the “Out” pin wire a male to female wire that from the breadboard to the surface of the music shield to the M+ pin. With the next pin on the microphone “VDD” take a male to male wire and place it next to the “VDD” pin to the minus column on the breadboard. Finally with the “GND” pin on the microphone wire another male to male wire next to “GND” pin on the microphone and wire the end to the plus column on the breadboard.
+
+    
+
+6.	Next we need 2 more male to female wires that will need to be wired from the breadboard to the surface of the MP3 shield. Looking at the diagram connect one on the plus column from the breadboard to the “5V” pin on surface of the MP3 shield. The second wire will be connected from the minus column of the breadboard to the “GND” pin on the surface of the MP3 shield.()
+
+   
+
+7.	Next is going to be our setup with the audio switchboard. For this you will need to grab a new breadboard for setup. Taking another breadboard grab 2 male to female wires. Stick on end of the wire onto the surface of the MP3 shield to pin “GND”. There should be a second one on there. Place the other pin onto the minus column of your second new breadboard. Taking another wire, place it onto the surface of your MP3 shield to pin “Vin” and the pin it to plus column of your new breadboard.
+
+   
+
+8.	Next we need two male to male wires for our breadboard. These are going to be placed directly on the opposite end of the breadboard. Take the first one and pin it to the plus column of your breadboard in the minus column and place the other end to the other plus column of your breadboard on the other side. Take the second wire and place it same as before with the first wire but be sure that both ends are in the minus columns. Make sure that these two wires are close to each other we bridge the 2 lines so we can have 5v and gnd on both sides of the breadboard.  
+ 
+
+9.	Next is going to be our audio amplifier. This is labeled “LM386” on it. Before placing it onto the breadboard take a look to see if there is a groove on the amplifier. Be sure that groove is facing away from the two wires you have just placed in the previous step. (facing left) Place them in the left mid area of your breadboard. Use the diagram as a guide for placement.
+ 
+
+10.	 We are going to be adding a resistor and a capacitor next to our amplifier. Take a 1.2K ohm resistor and using the diagram as reference take one end of the pin and place it next to the far bottom left pin of your amplifier. Then take a 10uF (micro farads) capacitor that is 25V and place one pin end that doesn’t have white shaded on the capacitor and place it next to the top far left pin of your amplifier.  All that is left is to place the other end pin of the resistor and the capacitor next to each other as shown on the diagram.
+ 
+
+11.	 Next we are going to need a 100nF (nano farad) capacitor and a male to male wire for our amplifier. Starting with the capacitor take one end of the capacitor and place it next to the top mid-left pin of your amplifier and stick the other end of pin to the minus column of the breadboard. Then taking the male to male wire place one end next to the bottom mid-left pin of the amplifier and the other end to the minus column of the breadboard.
+
+ 
+
+12.	 Next we are going to need a few male to male wires, a headphone jack with wires soldered onto it already, a headphone aux cord with 3 wire pins on the other end and another potentiometer that has 3 wires already soldered to it. Starting with the male to male wire place one end next to the mid-right pin of the amplifier and place the other end onto the plus column of the breadboard. Next with the potentiometer in hand, with the dial facing towards you take the left wire and place it in the minus column of your breadboard. Next with the middle wire of your potentiometer pin it next to the bottom mid-right pin of your amplifier. Now we need to place our headphone jack onto the breadboard. Taking a look at the headphone jack you’ll notice 5 wires attached to it, four in the back and one in the front. Having the headphone jack face away from you place the 4 back wires right next to each other aligned from left to right onto the breadboard close to the top right area of the breadboard as possible. Then taking the headphone aux cord take the green and purple wires and pin them aligned to the far left wire of the headphone jack.  Then with the yellow wire from the headphone aux cord, pin it next to the far right wire of the headphone jack. Now going back to the potentiometer with the far right wire pin it next to the mid left wire of your headphone jack. Once that is done, plug the headphone aux cord to the headphone jack on the surface of the MP3 shield.
+  
+(Note: Green is right output, Yellow is left output and Purple is GND)
+
+13.	 Next we need a few male to male wires, 8 ohm speaker, 10 ohm resistor, 250uF (micro farad) capacitor and  1uF (micro farad) capacitors. Start by wiring a male to male wire next to the bottom far right pin of the amplifier and pin the other end to the minus column of the breadboard. Next we need to take our 250uF capacitor next to the top far right pin of the amplifier. Be sure that the pin is the one on the white shaded side of the capacitor. Then with the other pin place it into the breadboard. We then need to take our speaker and look for the minus polarity wire from our speaker and pin it in front of the capacitor we had just placed. (The pin that isn’t next to the amplifier.) Going back to the speaker, place the other pin into the minus column of our breadboard. Next taking our resistor place one end of the pin behind the capacitor we had just placed and the other endpin to the right of it.  Next we need to take are last 2 1uF capacitors and place them behind the right pin of our resistor we just placed. Be sure that the resistors are aligned in a diagonally parallel pacement and that the white shaded sides of the capacitors are facing to the left. (Refer to the diagram) Finally we must place a male to male wire next to our 2 capacitors and pin the other end to the minus column of the bread board.
+
+ 
+
+14.	 Now that we have our setup for testing, it’s time to format our Arduino component. To start you will need a micro SD card  the capacity of the SD card depends on the user . Load into the SD card some music or audio files. Be sure that they are in MP3 format. (Ex. Music.mp3) IMPORTANT. The file name must be equal or less than 8 characters or the device won’t play the files.  (Ex. abcdefgh.mp3) Rename the file if need on a computer before you upload them onto the SD card also don´t forget to add the file named v44k1q05.img that is a patch from adafruit that makes work the recording that patch can be found at: https://github.com/adafruit/Adafruit_VS1053_Library/blob/master/examples/record_ogg/v44k1q05.img 
+Once you have your formatted micro SD card place the card into the SD slot on the surface of the MP3 shield
+
+15.	Next we need to upload our program into the Arduino board. We need to have the Arduino program environment to do it, and can be founded at: http://arduino.cc/en/Main/Software the Arduino development tool you can upload the program from there. Start by connecting your Arduino directly to the computer. You will need a C2G USB cable in order to do this. Once you have your cable connected, go back to your Arduino development tool on your computer and in the overhead toolbar select Tools and then select Board, you should be using an Arduino. Then go to Serial Port under Tools and select usbmodem. Now that we have configured our upload settings we can proceed to upload our program. Looking back at the Arduino development tool on our computer click on the arrow to upload the program onto the Arduino. You should get a window prompt that says upload complete when the upload is finished. If this does not work at the beginning or if your computer doesn’t ‘recognize the Arduino you must go to the device manager (win 7, vista, xp) and you will find something like this: 
+Then to install the drivers:
+ 
+And then we will be ready to start uploading the program.
+ 
+16.	Then you will need some libraries that we already upload into the github page, the link is the following https://github.com/rao102/AudioProject/tree/master/libraries
+Download the zip file and then extract it on C:\Users\yourcomputername\Documents\Arduino\libraries after that you will  only have to load the program and press verify and upload and its done, but don´t forget to go to: https://github.com/rao102/Audio-Project/blob/master/150218_final_uno.ino
+
+Just copy the code and paste it into the Arduino programming environment, make sure you copy all the code otherwise is not going to compile, but if the program is ready you will see something like this:
+ 
+And when you upload the program you will see something like this:
+ 
+17.	Finally we need to set up our power input. We actually need to set two input power sources. One that will be used for power up the buttons, other for power up  the Arduino and the other power output that will go directly onto the audio switch board this last one should be at least 12v DC. Start with a 12v DC rechargeable battery that has a output cord and an input cord but if you have a charger of 12 volts that can work as well. We also are going to need a 12V 9V DC power Y Splitter Cable with one male head output cord cut off with 2 jumper wires soldered to it. Start with plugging the Y cable into the battery, then proceed to pin the plus and minus polarities of the two jumper wires into the audio switch breadboard in the plus and minus columns respectively. All that is left is to plus the other Y male cord into the Arduino and hit the power switch on the battery. Now your playback set up is ready. Test the buttons and have fun!
+
+If you need to view a full diagram for this setup follow the link below:
+
+https://raw.githubusercontent.com/rao102/Audio-Project/master/resources/chattertale_bb.png
+
+Block Diagram
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Troubleshooting
+
