@@ -3,7 +3,7 @@ Audio-Project
 
 ChatterTale: An Audio Play Back Device
 
-![ChatterTale Schematic](https://github.com/rao102/Audio-Project/blob/master/resources/chattertale_bb.png)
+![ChatterTale Schematic](https://raw.githubusercontent.com/Letstech/Audio-Project/master/documentation/Fritzing%20Steps/47_bb.png)
 
 New Amp for Prototyping:
 ![ChatterTale Schematic using the new amp](https://github.com/rao102/Audio-Project/blob/master/resources/chattertale_new_amp_bb.png)
