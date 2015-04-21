@@ -95,7 +95,6 @@
 	  pinMode(LED_PIN,OUTPUT);
 	  digitalWrite(LED_PIN,HIGH);
 	  
-	  // countPlayButton = 0;
 	  countForwardButton = 0;
 	  countBackwardButton = 0;
 
@@ -126,7 +125,6 @@
 	}
 
 	void loop() {  
-	   // countPlayButton = 0;
 	   countBackwardButton = 0;
 	   countForwardButton = 0;
 	   
@@ -147,7 +145,8 @@
 	      handleError();
 	    }
 	    
-	    if (! musicPlayer.startPlayingFile(info.getFileName(info.getCurrentFileIndex()))) {
+	    if (!musicPlayer.startPlayingFile(info.getFileName(info.getCurrentFileIndex()))) {
+	    	Serial.println("Current File Index: "); Serial.println(info.getCurrentFileIndex());
 	      Serial.println(F("Could not open file track001.mp3"));
 	      handleError();
 	    }
@@ -283,7 +282,7 @@
 	  
 	  /******************** recording code **********************/
 	  if (!isRecording && !digitalRead(REC_BUTTON)) {
-	    Serial.println(F("Begin recording"));
+	    Serial.println(F("Begining to record"));
 	     
 	    isRecording = true;
 	    
@@ -295,7 +294,7 @@
 	      filename[2] = '0' + i%10;
 	      // create if does not exist, do not open existing, write, sync after write
 	      if (! SD.exists(filename)) {
-	        Serial.println(F("exist filename"));
+	        Serial.println(F("filename already exists."));
 	        break;
 	      }
 	    }
@@ -321,8 +320,10 @@
 	    // flush all the data!
 	    saveRecordedData(isRecording);
 	    // close it up
+	    Serial.println(F("Closing..."));
 	    recording.close();
-	   // delay(100);
+	    delay(100);
+	    Serial.println(F("Preparing to reset..."));
 	    musicPlayer.reset();
 	    info.deleteFileName();
 	    software_Reboot();
